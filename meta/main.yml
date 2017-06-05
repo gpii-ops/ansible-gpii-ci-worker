@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Tyler Roscoe
+  description: Minimal Ansible role to manage CentOS 7.3 worker nodes to run CI/CD for the GPII.
+  company: Raising the Floor - US
+
+  license: MIT
+
+  min_ansible_version: 2.2.1.0
+
+  platforms:
+  - name: EL
+    versions:
+    - 7
+
+  galaxy_tags: []
+
+dependencies: []

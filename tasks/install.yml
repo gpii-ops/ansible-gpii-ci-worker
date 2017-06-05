@@ -1,0 +1,7 @@
+---
+- name: Add EPEL repository
+  package:
+    name: epel-release
+    state: latest
+  tags:
+    - skip_ansible_lint

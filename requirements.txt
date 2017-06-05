@@ -1,0 +1,5 @@
+ansible
+flake8
+molecule
+python-vagrant
+setuptools > 0.9.8  # ansible-lint started freaking out about this when I pinned ansible==2.2.1.0
