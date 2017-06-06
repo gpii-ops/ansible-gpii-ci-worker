@@ -1,0 +1,3 @@
+---
+- src: https://github.com/haroldb/ansible-gitlab-runner
+  name: ansible-gitlab-runner
