@@ -9,3 +9,15 @@ def test_gitlab_service_enabled_and_running(Service):
     svc = Service("gitlab-runner")
     assert svc.is_enabled
     assert svc.is_running
+
+
+def test_terraform_installed(Command):
+    assert Command.exists("terraform")
+
+
+def test_terragrunt_installed(Command):
+    assert Command.exists("terragrunt")
+
+
+def test_jq_installed(Command):
+    assert Command.exists("jq")

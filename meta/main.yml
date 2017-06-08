@@ -15,4 +15,6 @@ galaxy_info:
   galaxy_tags: []
 
 dependencies:
-  - ansible-gitlab-runner
+  - role: ansible-gitlab-runner
+    gitlab_runner_registration_token: '{{ local_gitlab_runner_registration_token }}'
+    gitlab_runner_list: '{{ local_gitlab_runner_list }}'

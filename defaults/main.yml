@@ -1,1 +1,11 @@
 ---
+terraform_version: 0.9.5
+terragrunt_version: 0.12.1
+jq_version: 1.5
+
+# These are passed to the ansible-gitlab-runner and need a distinct name to
+# prevent interpolation recursion. They must be defined (to prevent an
+# undefined variable later) but can be empty to disable the relevant
+# registration section (single via _registration_token, or multi via _list).
+local_gitlab_runner_registration_token: ""
+local_gitlab_runner_list: []
