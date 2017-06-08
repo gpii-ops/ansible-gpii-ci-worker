@@ -11,8 +11,7 @@
     url: 'https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip'
     dest: /usr/local/bin/
     mode: 0555
-    # From e.g. https://releases.hashicorp.com/terraform/0.9.5/terraform_0.9.5_SHA256SUMS
-    checksum: sha256:0cbb5474c76d878fbc99e7705ce6117f4ea0838175c13b2663286a207e38d783
+    checksum: '{{ terraform_checksum }}'
 
 - name: Unzip terraform
   unarchive:
