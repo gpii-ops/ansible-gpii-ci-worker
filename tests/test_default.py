@@ -23,6 +23,12 @@ def test_jq_installed(Command):
     assert Command.exists("jq")
 
 
+def test_rvm_gpg_key_imported(Command, Sudo):
+    with Sudo("gitlab-runner"):
+        gpg_list_keys = Command.check_output("gpg --list-keys")
+    assert "Michal Papis (RVM signing) <mpapis@gmail.com>" in gpg_list_keys
+
+
 def test_ssh_known_hosts_configured(File, Sudo):
     # Needed because .ssh is private (0700).
     with Sudo():

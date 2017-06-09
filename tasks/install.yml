@@ -30,3 +30,20 @@
     url: 'https://github.com/stedolan/jq/releases/download/jq-{{ jq_version }}/jq-linux64'
     dest: /usr/local/bin/jq
     mode: 0555
+
+- name: Check for rvm gpg key
+  command: gpg --list-keys
+  register: gpg_list_keys
+  changed_when: false
+
+- name: Import rvm gpg key
+  # Based on install instructions from https://rvm.io/
+  command: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  become: true
+  become_user: gitlab-runner
+  when: gpg_list_keys.stdout.find('Michal Papis (RVM signing) <mpapis@gmail.com>') != -1
+
+
+#- name: Install rvm
+#- name: Install ruby
+#- name: Install bundler
