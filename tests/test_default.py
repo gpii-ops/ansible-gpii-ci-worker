@@ -27,4 +27,17 @@ def test_ssh_known_hosts_configured(File, Sudo):
     # Needed because .ssh is private (0700).
     with Sudo():
         ff = File("/home/gitlab-runner/.ssh/known_hosts")
+        # Existence check seems superfluous but it produces a more helpful
+        # error message than .contains() when file does not exist.
+        assert ff.exists
+        assert ff.contains("github.com")
+
+
+def test_ssh_config_configured(File, Sudo):
+    # Needed because .ssh is private (0700).
+    with Sudo():
+        ff = File("/home/gitlab-runner/.ssh/config")
+        # Existence check seems superfluous but it produces a more helpful
+        # error message than .contains() when file does not exist.
+        assert ff.exists
         assert ff.contains("github.com")
