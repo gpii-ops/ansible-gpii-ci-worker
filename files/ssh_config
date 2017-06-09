@@ -1,0 +1,7 @@
+# NOTE: This file is managed by ansible-gpii-ci-worker! Local changes will be discarded!
+Host github.com
+    IdentityFile ~/.ssh/id_rsa.gpii-ci
+    IdentitiesOnly yes
+Host gitlab.com
+    IdentityFile ~/.ssh/id_rsa.gpii-ci
+    IdentitiesOnly yes
