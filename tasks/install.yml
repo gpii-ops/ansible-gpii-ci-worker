@@ -13,19 +13,19 @@
     mode: 0555
     checksum: '{{ terraform_checksum }}'
 
-- name: Unzip terraform
+- name: Unzip and install terraform
   unarchive:
     src: /usr/local/bin/terraform_{{ terraform_version }}_linux_amd64.zip
     dest: /usr/local/bin/
     remote_src: True
 
-- name: Download terragrunt
+- name: Download and install terragrunt
   get_url:
     url: 'https://github.com/gruntwork-io/terragrunt/releases/download/v{{ terragrunt_version }}/terragrunt_linux_amd64'
     dest: /usr/local/bin/terragrunt
     mode: 0555
 
-- name: Download jq
+- name: Download and install jq
   get_url:
     url: 'https://github.com/stedolan/jq/releases/download/jq-{{ jq_version }}/jq-linux64'
     dest: /usr/local/bin/jq

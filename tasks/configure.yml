@@ -1,1 +1,17 @@
 ---
+- name: Create .ssh/
+  file:
+    path: /home/gitlab-runner/.ssh
+    state: directory
+    owner: gitlab-runner
+    group: gitlab-runner
+    mode: 0700
+
+- name: Configure ssh known_hosts
+  copy:
+    src: files/ssh_known_hosts
+    dest: ~gitlab-runner/.ssh/known_hosts
+    owner: gitlab-runner
+    group: gitlab-runner
+    mode: 0644
+    backup: yes

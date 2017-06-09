@@ -1,8 +1,8 @@
 ---
-# These are passed to the ansible-gitlab-runner and need a distinct name to
-# prevent interpolation recursion. They must be defined (to prevent an
-# undefined variable later) but can be empty to disable the relevant
-# registration section (single via _registration_token, or multi via _list).
+# These are passed to ansible-gitlab-runner and need a distinct name to prevent
+# interpolation recursion. They must be defined (to prevent an undefined
+# variable later) but can be empty to disable the relevant registration section
+# (single via _registration_token, or multi via _list).
 local_gitlab_runner_registration_token: ""
 local_gitlab_runner_list: []
 

@@ -21,3 +21,10 @@ def test_terragrunt_installed(Command):
 
 def test_jq_installed(Command):
     assert Command.exists("jq")
+
+
+def test_ssh_known_hosts_configured(File, Sudo):
+    # Needed because .ssh is private (0700).
+    with Sudo():
+        ff = File("/home/gitlab-runner/.ssh/known_hosts")
+        assert ff.contains("github.com")
