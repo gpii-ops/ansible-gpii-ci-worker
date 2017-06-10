@@ -65,5 +65,25 @@
   become_user: gitlab-runner
   when: rvm_exists.stat.exists == False
 
+- name: Check for ruby installation
+  stat:
+    path: ~gitlab-runner/.rvm/rubies/ruby-{{ ruby_version }}/bin/ruby
+  register: ruby_exists
+
+- name: Install ruby prerequisites
+  command: ~gitlab-runner/.rvm/bin/rvm requirements {{ ruby_version }}
+  when: ruby_exists.stat.exists == False
+
+- name: Install ruby with rvm
+  # We install rvm locally for the gitlab-runner user only (see
+  # https://issues.gpii.net/browse/GPII-2389?focusedCommentId=26403&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-26403)
+  #
+  # This means we need to use the gitlab-runner user's local dotfiles. That's
+  # sort of tricky with ansible. This explicit call to "sudo -i" is a
+  # workaround (see https://stackoverflow.com/a/32030344 and/or
+  # https://github.com/ansible/ansible/issues/4854#issuecomment-39284921).
+  command: sudo -i -u gitlab-runner rvm install {{ ruby_version }}
+  when: ruby_exists.stat.exists == False
+
 #- name: Install ruby
 #- name: Install bundler

@@ -32,9 +32,12 @@ def test_rvm_gpg_key_imported(Command, Sudo):
 def test_rvm_installed_only_for_gitlab_runner(Command, File, Sudo):
     assert not Command.exists("rvm")
     with Sudo("gitlab-runner"):
-        ff = File("/home/gitlab-runner/.rvm/bin/rvm")
-        assert ff.exists
-        assert ff.mode == 0755
+        assert File("/home/gitlab-runner/.rvm/bin/rvm").exists
+
+
+def test_ruby_installed_with_rvm(File, Sudo):
+    with Sudo("gitlab-runner"):
+        assert File("/home/gitlab-runner/.rvm/rubies/ruby-2.4.0/bin/ruby").exists
 
 
 def test_ssh_known_hosts_configured(File, Sudo):
