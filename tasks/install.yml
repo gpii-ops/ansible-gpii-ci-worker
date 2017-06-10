@@ -33,6 +33,8 @@
 
 - name: Check for rvm gpg key
   command: gpg --list-keys
+  become: true
+  become_user: gitlab-runner
   register: gpg_list_keys
   changed_when: false
 
@@ -41,9 +43,27 @@
   command: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
   become: true
   become_user: gitlab-runner
-  when: gpg_list_keys.stdout.find('Michal Papis (RVM signing) <mpapis@gmail.com>') != -1
+  when: gpg_list_keys.stdout.find('Michal Papis (RVM signing) <mpapis@gmail.com>') == -1
 
+- name: Check for rvm installation
+  stat:
+    path: ~gitlab-runner/.rvm/bin/rvm
+  register: rvm_exists
 
-#- name: Install rvm
+- name: Download rvm installer
+  get_url:
+    url: 'https://get.rvm.io'
+    dest: /tmp/rvm_installer.bash
+    mode: 0555
+  become: true
+  become_user: gitlab-runner
+  when: rvm_exists.stat.exists == False
+
+- name: Install rvm
+  command: /tmp/rvm_installer.bash stable
+  become: true
+  become_user: gitlab-runner
+  when: rvm_exists.stat.exists == False
+
 #- name: Install ruby
 #- name: Install bundler

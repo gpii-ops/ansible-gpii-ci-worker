@@ -29,6 +29,14 @@ def test_rvm_gpg_key_imported(Command, Sudo):
     assert "Michal Papis (RVM signing) <mpapis@gmail.com>" in gpg_list_keys
 
 
+def test_rvm_installed_only_for_gitlab_runner(Command, File, Sudo):
+    assert not Command.exists("rvm")
+    with Sudo("gitlab-runner"):
+        ff = File("/home/gitlab-runner/.rvm/bin/rvm")
+        assert ff.exists
+        assert ff.mode == 0755
+
+
 def test_ssh_known_hosts_configured(File, Sudo):
     # Needed because .ssh is private (0700).
     with Sudo():
