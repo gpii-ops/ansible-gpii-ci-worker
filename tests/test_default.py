@@ -40,6 +40,11 @@ def test_ruby_installed_with_rvm(File, Sudo):
         assert File("/home/gitlab-runner/.rvm/rubies/ruby-2.4.0/bin/ruby").exists
 
 
+def test_bundler_installed_with_rvm(File, Sudo):
+    with Sudo("gitlab-runner"):
+        assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.0/bin/bundle").exists
+
+
 def test_ssh_known_hosts_configured(File, Sudo):
     # Needed because .ssh is private (0700).
     with Sudo():

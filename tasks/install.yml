@@ -85,5 +85,11 @@
   command: sudo -i -u gitlab-runner rvm install {{ ruby_version }}
   when: ruby_exists.stat.exists == False
 
-#- name: Install ruby
-#- name: Install bundler
+- name: Check for bundler installation
+  stat:
+    path: ~gitlab-runner/.rvm/gems/ruby-{{ ruby_version }}/bin/bundle
+  register: bundler_exists
+
+- name: Install bundler with rvm
+  command: sudo -i -u gitlab-runner gem install bundler
+  when: bundler_exists.stat.exists == False
