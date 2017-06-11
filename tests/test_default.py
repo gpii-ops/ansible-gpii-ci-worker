@@ -45,8 +45,15 @@ def test_bundler_installed_with_rvm(File, Sudo):
         assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.0/bin/bundle").exists
 
 
+def test_git_configured(Command, Sudo):
+    with Sudo("gitlab-runner"):
+        # With Sudo() but without --git-dir, git tries to read pwd, doesn't
+        # have permissions, and aborts.
+        git_config_list = Command.check_output("git --git-dir=/tmp config -l")
+    assert "GPII CI Robot" in git_config_list
+
+
 def test_ssh_known_hosts_configured(File, Sudo):
-    # Needed because .ssh is private (0700).
     with Sudo():
         ff = File("/home/gitlab-runner/.ssh/known_hosts")
         # Existence check seems superfluous but it produces a more helpful
@@ -56,7 +63,6 @@ def test_ssh_known_hosts_configured(File, Sudo):
 
 
 def test_ssh_config_configured(File, Sudo):
-    # Needed because .ssh is private (0700).
     with Sudo():
         ff = File("/home/gitlab-runner/.ssh/config")
         # Existence check seems superfluous but it produces a more helpful
