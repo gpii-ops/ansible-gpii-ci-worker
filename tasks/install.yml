@@ -24,12 +24,14 @@
     url: 'https://github.com/gruntwork-io/terragrunt/releases/download/v{{ terragrunt_version }}/terragrunt_linux_amd64'
     dest: /usr/local/bin/terragrunt
     mode: 0555
+    force: yes
 
 - name: Download and install jq
   get_url:
     url: 'https://github.com/stedolan/jq/releases/download/jq-{{ jq_version }}/jq-linux64'
     dest: /usr/local/bin/jq
     mode: 0555
+    force: yes
 
 - name: Check for rvm gpg key
   command: gpg --list-keys
