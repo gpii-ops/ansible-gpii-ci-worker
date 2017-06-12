@@ -3,7 +3,7 @@ Ansible role: gpii-ci-worker
 
 Minimal Ansible role to manage CentOS 7.3 worker nodes running CI/CD for the [GPII](https://github.com/GPII). This includes:
 
-  * [gitlab-runner](https://docs.gitlab.com/runner/) via [ansible-gitlab-runner](https://github.com/mrtyler/ansible-gitlab-runner)
+  * [gitlab-runner](https://docs.gitlab.com/runner/) via [ansible-gitlab-runner](https://github.com/DBLaci/ansible-gitlab-runner)
   * [Terraform](https://www.terraform.io/) and [Terragrunt](https://github.com/gruntwork-io/terragrunt)
   * [jq](https://stedolan.github.io/jq/)
   * [rvm](https://rvm.io/) and [bundler](http://bundler.io/)
@@ -16,7 +16,7 @@ Requirements
  * CentOS 7.x
  * Ansible 2.x
  * systemd
- * [ansible-gitlab-runner](https://github.com/mrtyler/ansible-gitlab-runner)
+ * [ansible-gitlab-runner](https://github.com/DBLaci/ansible-gitlab-runner)
 
 Role Variables
 --------------
