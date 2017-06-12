@@ -1,15 +1,16 @@
 ---
-# These are passed to ansible-gitlab-runner and need a distinct name to prevent
-# interpolation recursion. They must be defined (to prevent an undefined
-# variable later) but can be empty to disable the relevant registration section
-# (single via _registration_token, or multi via _list).
-local_gitlab_runner_registration_token: ""
-local_gitlab_runner_list: []
+# Passed to ansible-gitlab-runner.
+gpii_ci_worker_gitlab_runner_registration_token: ""
 
-terraform_version: 0.9.5
-# From e.g. https://releases.hashicorp.com/terraform/0.9.5/terraform_0.9.5_SHA256SUMS
-terraform_checksum: sha256:0cbb5474c76d878fbc99e7705ce6117f4ea0838175c13b2663286a207e38d783
-terragrunt_version: 0.12.6
-jq_version: 1.5
+# Passed to ansible-gitlab-runner.
+gpii_ci_worker_gitlab_runner_list: []
 
-ruby_version: 2.4.0
+gpii_ci_worker_terraform_version: 0.9.5
+# From e.g. https://releases.hashicorp.com/terraform/{{ gpii_ci_worker_terraform_version }}/terraform_{{ gpii_ci_worker_terraform_version }}_SHA256SUMS
+gpii_ci_worker_terraform_checksum: sha256:0cbb5474c76d878fbc99e7705ce6117f4ea0838175c13b2663286a207e38d783
+
+gpii_ci_worker_terragrunt_version: 0.12.6
+
+gpii_ci_worker_jq_version: 1.5
+
+gpii_ci_worker_ruby_version: 2.4.0

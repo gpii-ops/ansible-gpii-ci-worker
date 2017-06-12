@@ -8,53 +8,49 @@
 
 # From https://github.com/azavea/ansible-terraform/blob/develop/tasks/main.yml
 - name: Check terraform version
-  shell: "/usr/local/bin/terraform --version | head -n1 | grep {{ terraform_version }}"
+  shell: "/usr/local/bin/terraform --version | head -n1 | grep {{ gpii_ci_worker_terraform_version }}"
   failed_when: False
   changed_when: False
   register: current_terraform_version
 
-- name: debug
-  debug:
-    msg: "{{ current_terraform_version, current_terraform_version.stdout, current_terraform_version.rc }}"
-
 - name: Download terraform
   get_url:
-    url: 'https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip'
+    url: 'https://releases.hashicorp.com/terraform/{{ gpii_ci_worker_terraform_version }}/terraform_{{ gpii_ci_worker_terraform_version }}_linux_amd64.zip'
     dest: /usr/local/bin/
     mode: 0555
-    checksum: '{{ terraform_checksum }}'
+    checksum: '{{ gpii_ci_worker_terraform_checksum }}'
   when: current_terraform_version.rc != 0
 
 - name: Unzip and install terraform
   unarchive:
-    src: /usr/local/bin/terraform_{{ terraform_version }}_linux_amd64.zip
+    src: /usr/local/bin/terraform_{{ gpii_ci_worker_terraform_version }}_linux_amd64.zip
     dest: /usr/local/bin/
     remote_src: True
   when: current_terraform_version.rc != 0
 
 - name: Check terragrunt version
-  shell: "/usr/local/bin/terragrunt --version | head -n1 | grep {{ terragrunt_version }}"
+  shell: "/usr/local/bin/terragrunt --version | head -n1 | grep {{ gpii_ci_worker_terragrunt_version }}"
   failed_when: False
   changed_when: False
   register: current_terragrunt_version
 
 - name: Download and install terragrunt
   get_url:
-    url: 'https://github.com/gruntwork-io/terragrunt/releases/download/v{{ terragrunt_version }}/terragrunt_linux_amd64'
+    url: 'https://github.com/gruntwork-io/terragrunt/releases/download/v{{ gpii_ci_worker_terragrunt_version }}/terragrunt_linux_amd64'
     dest: /usr/local/bin/terragrunt
     mode: 0555
     force: yes
   when: current_terragrunt_version.rc != 0
 
 - name: Check jq version
-  shell: "/usr/local/bin/jq --version | head -n1 | grep {{ jq_version }}"
+  shell: "/usr/local/bin/jq --version | head -n1 | grep {{ gpii_ci_worker_jq_version }}"
   failed_when: False
   changed_when: False
   register: current_jq_version
 
 - name: Download and install jq
   get_url:
-    url: 'https://github.com/stedolan/jq/releases/download/jq-{{ jq_version }}/jq-linux64'
+    url: 'https://github.com/stedolan/jq/releases/download/jq-{{ gpii_ci_worker_jq_version }}/jq-linux64'
     dest: /usr/local/bin/jq
     mode: 0555
     force: yes
@@ -96,11 +92,11 @@
 
 - name: Check for ruby installation
   stat:
-    path: ~gitlab-runner/.rvm/rubies/ruby-{{ ruby_version }}/bin/ruby
+    path: ~gitlab-runner/.rvm/rubies/ruby-{{ gpii_ci_worker_ruby_version }}/bin/ruby
   register: ruby_exists
 
 - name: Install ruby prerequisites
-  command: ~gitlab-runner/.rvm/bin/rvm requirements {{ ruby_version }}
+  command: ~gitlab-runner/.rvm/bin/rvm requirements {{ gpii_ci_worker_ruby_version }}
   when: ruby_exists.stat.exists == False
 
 - name: Install ruby with rvm
@@ -111,12 +107,12 @@
   # sort of tricky with ansible. This explicit call to "sudo -i" is a
   # workaround (see https://stackoverflow.com/a/32030344 and/or
   # https://github.com/ansible/ansible/issues/4854#issuecomment-39284921).
-  command: sudo -i -u gitlab-runner rvm install {{ ruby_version }}
+  command: sudo -i -u gitlab-runner rvm install {{ gpii_ci_worker_ruby_version }}
   when: ruby_exists.stat.exists == False
 
 - name: Check for bundler installation
   stat:
-    path: ~gitlab-runner/.rvm/gems/ruby-{{ ruby_version }}/bin/bundle
+    path: ~gitlab-runner/.rvm/gems/ruby-{{ gpii_ci_worker_ruby_version }}/bin/bundle
   register: bundler_exists
 
 - name: Install bundler with rvm
