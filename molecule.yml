@@ -23,4 +23,3 @@ verifier:
 molecule:
   ignore_paths:
     - venv
-    - "../ansible-gitlab-runner"  # 3rd-party dependency that fails lint
