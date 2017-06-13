@@ -3,7 +3,7 @@
   git_config:
     name: user.name
     scope: global
-    value: GPII CI Robot
+    value: GPII Bot
   become: true
   become_user: gitlab-runner
 
@@ -11,7 +11,7 @@
   git_config:
     name: user.email
     scope: global
-    value: gpii-ci-no-reply@raisingthefloor.org
+    value: gpii-bot@gpii.net
   become: true
   become_user: gitlab-runner
 
