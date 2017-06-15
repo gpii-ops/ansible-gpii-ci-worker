@@ -16,5 +16,6 @@ galaxy_info:
 
 dependencies:
   - role: ansible-gitlab-runner
+    gitlab_runner_concurrent: '{{ gpii_ci_worker_gitlab_runner_concurrent }}'
     gitlab_runner_registration_token: '{{ gpii_ci_worker_gitlab_runner_registration_token }}'
     gitlab_runner_list: '{{ gpii_ci_worker_gitlab_runner_list }}'

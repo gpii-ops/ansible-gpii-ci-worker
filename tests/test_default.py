@@ -50,7 +50,7 @@ def test_git_configured(Command, Sudo):
         # With Sudo() but without --git-dir, git tries to read pwd, doesn't
         # have permissions, and aborts.
         git_config_list = Command.check_output("git --git-dir=/tmp config -l")
-    assert "GPII CI Robot" in git_config_list
+    assert "GPII Bot" in git_config_list
 
 
 def test_ssh_known_hosts_configured(File, Sudo):
