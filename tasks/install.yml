@@ -28,6 +28,7 @@
     dest: /usr/local/bin/
     remote_src: True
   when: terraform_downloaded|changed
+  tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
 
 - name: Check terragrunt version
   shell: "/usr/local/bin/terragrunt --version | head -n1 | grep {{ gpii_ci_worker_terragrunt_version }}"
