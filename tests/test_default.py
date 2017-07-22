@@ -23,6 +23,10 @@ def test_kubectl_installed(Command):
     assert Command.exists("kubectl")
 
 
+def test_kops_installed(Command):
+    assert Command.exists("kops")
+
+
 def test_jq_installed(Command):
     assert Command.exists("jq")
 
