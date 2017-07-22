@@ -27,6 +27,10 @@ def test_kops_installed(Command):
     assert Command.exists("kops")
 
 
+def test_aws_cli_installed(Command):
+    assert Command.exists("aws")
+
+
 def test_jq_installed(Command):
     assert Command.exists("jq")
 

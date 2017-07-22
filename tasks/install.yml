@@ -1,4 +1,11 @@
 ---
+- name: Add EPEL repository
+  package:
+    name: epel-release
+    state: latest
+  tags:
+    - skip_ansible_lint
+
 - name: Install unzip
   package:
     name: unzip
@@ -71,6 +78,21 @@
     mode: 0555
     force: yes
   when: current_kops_version.rc is not defined or current_kops_version.rc != 0
+
+- name: Install pip
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - gcc
+    - python-devel
+    - python2-pip
+  tags:
+    - skip_ansible_lint
+
+- name: Install aws cli
+  pip:
+    name: awscli
 
 - name: Check jq version
   shell: "/usr/local/bin/jq --version | head -n1 | grep {{ gpii_ci_worker_jq_version }}"
