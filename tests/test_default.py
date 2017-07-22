@@ -53,6 +53,11 @@ def test_bundler_installed_with_rvm(File, Sudo):
         assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.0/bin/bundle").exists
 
 
+def test_rake_installed_with_rvm(File, Sudo):
+    with Sudo("gitlab-runner"):
+        assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.0/bin/rake").exists
+
+
 def test_git_configured(Command, Sudo):
     with Sudo("gitlab-runner"):
         # With Sudo() but without --git-dir, git tries to read pwd, doesn't
