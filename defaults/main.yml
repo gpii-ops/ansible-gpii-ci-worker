@@ -14,6 +14,8 @@ gpii_ci_worker_terraform_checksum: sha256:804d31cfa5fee5c2b1bff7816b64f0e26b1d76
 
 gpii_ci_worker_terragrunt_version: 0.12.24
 
+gpii_ci_worker_kubectl_version: v1.7.2
+
 gpii_ci_worker_jq_version: 1.5
 
 gpii_ci_worker_ruby_version: 2.4.0

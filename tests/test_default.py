@@ -19,6 +19,10 @@ def test_terragrunt_installed(Command):
     assert Command.exists("terragrunt")
 
 
+def test_kubectl_installed(Command):
+    assert Command.exists("kubectl")
+
+
 def test_jq_installed(Command):
     assert Command.exists("jq")
 
