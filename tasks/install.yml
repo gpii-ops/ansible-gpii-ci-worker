@@ -6,6 +6,17 @@
   tags:
     - skip_ansible_lint
 
+# Around 2017-07-12, installing epel-release stopped being idempotent. The
+# latest epel-release package available on a vanilla CentOS 7 box was 7.9, but
+# installing 7.9 made 7.10 available. As a workaround, we install the package
+# twice so that the target machine is fully up-to-date.
+- name: Add EPEL repository again (upgrading to 7.9 makes 7.10 available)
+  package:
+    name: epel-release
+    state: latest
+  tags:
+    - skip_ansible_lint
+
 - name: Install unzip
   package:
     name: unzip
