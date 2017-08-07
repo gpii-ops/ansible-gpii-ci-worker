@@ -19,6 +19,18 @@ def test_terragrunt_installed(Command):
     assert Command.exists("terragrunt")
 
 
+def test_kubectl_installed(Command):
+    assert Command.exists("kubectl")
+
+
+def test_kops_installed(Command):
+    assert Command.exists("kops")
+
+
+def test_aws_cli_installed(Command):
+    assert Command.exists("aws")
+
+
 def test_jq_installed(Command):
     assert Command.exists("jq")
 
@@ -43,6 +55,11 @@ def test_ruby_installed_with_rvm(File, Sudo):
 def test_bundler_installed_with_rvm(File, Sudo):
     with Sudo("gitlab-runner"):
         assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.0/bin/bundle").exists
+
+
+def test_rake_installed_with_rvm(File, Sudo):
+    with Sudo("gitlab-runner"):
+        assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.0/bin/rake").exists
 
 
 def test_git_configured(Command, Sudo):

@@ -1,4 +1,22 @@
 ---
+- name: Add EPEL repository
+  package:
+    name: epel-release
+    state: latest
+  tags:
+    - skip_ansible_lint
+
+# Around 2017-07-12, installing epel-release stopped being idempotent. The
+# latest epel-release package available on a vanilla CentOS 7 box was 7.9, but
+# installing 7.9 made 7.10 available. As a workaround, we install the package
+# twice so that the target machine is fully up-to-date.
+- name: Add EPEL repository again (upgrading to 7.9 makes 7.10 available)
+  package:
+    name: epel-release
+    state: latest
+  tags:
+    - skip_ansible_lint
+
 - name: Install unzip
   package:
     name: unzip
@@ -43,6 +61,49 @@
     mode: 0555
     force: yes
   when: current_terragrunt_version.rc is not defined or current_terragrunt_version.rc != 0
+
+- name: Check kubectl version
+  shell: "/usr/local/bin/kubectl --version | head -n1 | grep {{ gpii_ci_worker_kubectl_version }}"
+  failed_when: False
+  changed_when: False
+  register: current_kubectl_version
+
+- name: Download and install kubectl
+  get_url:
+    url: 'https://storage.googleapis.com/kubernetes-release/release/{{ gpii_ci_worker_kubectl_version }}/bin/linux/amd64/kubectl'
+    dest: /usr/local/bin/kubectl
+    mode: 0555
+    force: yes
+  when: current_kubectl_version.rc is not defined or current_kubectl_version.rc != 0
+
+- name: Check kops version
+  shell: "/usr/local/bin/kops --version | head -n1 | grep {{ gpii_ci_worker_kops_version }}"
+  failed_when: False
+  changed_when: False
+  register: current_kops_version
+
+- name: Download and install kops
+  get_url:
+    url: 'https://github.com/kubernetes/kops/releases/download/{{ gpii_ci_worker_kops_version }}/kops-linux-amd64'
+    dest: /usr/local/bin/kops
+    mode: 0555
+    force: yes
+  when: current_kops_version.rc is not defined or current_kops_version.rc != 0
+
+- name: Install pip
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - gcc
+    - python-devel
+    - python2-pip
+  tags:
+    - skip_ansible_lint
+
+- name: Install aws cli
+  pip:
+    name: awscli
 
 - name: Check jq version
   shell: "/usr/local/bin/jq --version | head -n1 | grep {{ gpii_ci_worker_jq_version }}"
@@ -120,3 +181,12 @@
 - name: Install bundler with rvm
   command: sudo -i -u gitlab-runner gem install bundler
   when: bundler_exists.stat.exists == False
+
+- name: Check for rake installation
+  stat:
+    path: ~gitlab-runner/.rvm/gems/ruby-{{ gpii_ci_worker_ruby_version }}/bin/rake
+  register: rake_exists
+
+- name: Install rake with rvm
+  command: sudo -i -u gitlab-runner gem install rake
+  when: rake_exists.stat.exists == False
