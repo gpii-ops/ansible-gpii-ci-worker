@@ -6,11 +6,7 @@ gpii_ci_worker_gitlab_runner_concurrent: 4
 gpii_ci_worker_gitlab_runner_registration_token: ""
 
 # Passed to ansible-gitlab-runner
-###gpii_ci_worker_gitlab_runner_list: []
-gpii_ci_worker_gitlab_runner_list:
-- registration_token: xHd12YUZBgx53ynj7Uyn
-  description: '{{ ansible_hostname }}-gpii-terraform'
-  limit: 1
+gpii_ci_worker_gitlab_runner_list: []
 
 gpii_ci_worker_terraform_version: 0.9.11
 # From e.g. https://releases.hashicorp.com/terraform/{{ gpii_ci_worker_terraform_version }}/terraform_{{ gpii_ci_worker_terraform_version }}_SHA256SUMS
