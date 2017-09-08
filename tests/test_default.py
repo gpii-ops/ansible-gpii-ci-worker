@@ -62,6 +62,11 @@ def test_rake_installed_with_rvm(File, Sudo):
         assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.0/bin/rake").exists
 
 
+def test_docker_runs(Command, Sudo):
+    with Sudo("gitlab-runner"):
+        assert Command("docker images").rc == 0
+
+
 def test_git_configured(Command, Sudo):
     with Sudo("gitlab-runner"):
         # With Sudo() but without --git-dir, git tries to read pwd, doesn't
