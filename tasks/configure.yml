@@ -5,6 +5,15 @@
     groups: docker
     append: true
 
+- name: Log in to Docker Registry
+  docker_login:
+    username: "{{ gpii_ci_worker_docker_username | mandatory }}"
+    password: "{{ gpii_ci_worker_docker_password | mandatory }}"
+    email: "{{ gpii_ci_worker_docker_email | mandatory }}"
+  become: true
+  become_user: gitlab-runner
+  when: gpii_ci_worker_docker_username is defined
+
 - name: Configure git user.name for gitlab-runner
   git_config:
     name: user.name
