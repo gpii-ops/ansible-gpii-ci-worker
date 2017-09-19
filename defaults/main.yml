@@ -1,4 +1,10 @@
 ---
+# Docker Registry credentials are only active in production. Define these in
+# vault.yml.
+# gpii_ci_worker_docker_username: alice
+# gpii_ci_worker_docker_password: secret
+# gpii_ci_worker_docker_email: alice@example.com
+
 # Passed to ansible-gitlab-runner
 gpii_ci_worker_gitlab_runner_concurrent: 4
 

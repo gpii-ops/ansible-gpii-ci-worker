@@ -22,6 +22,15 @@ Role Variables
 --------------
 
 ```
+# Docker Registry credentials are only active in production. Define these in
+# vault.yml.
+# gpii_ci_worker_docker_username: alice
+# gpii_ci_worker_docker_password: secret
+# gpii_ci_worker_docker_email: alice@example.com
+
+# Passed to ansible-gitlab-runner
+gpii_ci_worker_gitlab_runner_concurrent: 4
+
 # Passed to ansible-gitlab-runner
 gpii_ci_worker_gitlab_runner_registration_token: ""
 
@@ -33,6 +42,10 @@ gpii_ci_worker_terraform_version: 0.9.5
 gpii_ci_worker_terraform_checksum: sha256:0cbb5474c76d878fbc99e7705ce6117f4ea0838175c13b2663286a207e38d783
 
 gpii_ci_worker_terragrunt_version: 0.12.6
+
+gpii_ci_worker_kubectl_version: v1.7.2
+
+gpii_ci_worker_kops_version: 1.6.2
 
 gpii_ci_worker_jq_version: 1.5
 
