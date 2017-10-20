@@ -22,7 +22,7 @@ gpii_ci_worker_terragrunt_version: 0.12.24
 
 gpii_ci_worker_kubectl_version: v1.7.2
 
-gpii_ci_worker_kops_version: 1.6.2
+gpii_ci_worker_kops_version: 1.7.1
 
 gpii_ci_worker_jq_version: 1.5
 
