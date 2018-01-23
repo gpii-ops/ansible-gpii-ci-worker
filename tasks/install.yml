@@ -90,6 +90,7 @@
     dest: /usr/local/bin/kops
     mode: 0555
     force: yes
+    checksum: '{{ gpii_ci_worker_kops_checksum }}'
   when: current_kops_version.rc is not defined or current_kops_version.rc != 0
 
 - name: Install pip

@@ -22,7 +22,9 @@ gpii_ci_worker_terragrunt_version: 0.12.24
 
 gpii_ci_worker_kubectl_version: v1.7.2
 
-gpii_ci_worker_kops_version: 1.7.1
+gpii_ci_worker_kops_version: 1.8.0
+# From e.g. https://github.com/kubernetes/kops/releases/download/{{ gpii_ci_worker_kops_version }}/kops-darwin-amd64-sha1
+gpii_ci_worker_kops_checksum: sha1:c19eb3cf0357bb5469636302ee56fe19ac5b5e30
 
 gpii_ci_worker_jq_version: 1.5
 
