@@ -49,17 +49,17 @@ def test_rvm_installed_only_for_gitlab_runner(Command, File, Sudo):
 
 def test_ruby_installed_with_rvm(File, Sudo):
     with Sudo("gitlab-runner"):
-        assert File("/home/gitlab-runner/.rvm/rubies/ruby-2.4.0/bin/ruby").exists
+        assert File("/home/gitlab-runner/.rvm/rubies/ruby-2.4.3/bin/ruby").exists
 
 
 def test_bundler_installed_with_rvm(File, Sudo):
     with Sudo("gitlab-runner"):
-        assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.0/bin/bundle").exists
+        assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.3/bin/bundle").exists
 
 
 def test_rake_installed_with_rvm(File, Sudo):
     with Sudo("gitlab-runner"):
-        assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.0/bin/rake").exists
+        assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.3/bin/rake").exists
 
 
 def test_docker_runs(Command, Sudo):
