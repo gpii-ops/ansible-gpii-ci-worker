@@ -173,7 +173,7 @@
   # sort of tricky with ansible. This explicit call to "sudo -i" is a
   # workaround (see https://stackoverflow.com/a/32030344 and/or
   # https://github.com/ansible/ansible/issues/4854#issuecomment-39284921).
-  command: sudo -i -u gitlab-runner rvm install {{ gpii_ci_worker_ruby_version }}
+  command: sudo -i -u gitlab-runner rvm install --default {{ gpii_ci_worker_ruby_version }}
   when: ruby_exists.stat.exists == False
 
 - name: Check for bundler installation
