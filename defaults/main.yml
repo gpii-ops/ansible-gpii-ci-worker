@@ -14,9 +14,9 @@ gpii_ci_worker_gitlab_runner_registration_token: ""
 # Passed to ansible-gitlab-runner
 gpii_ci_worker_gitlab_runner_list: []
 
-gpii_ci_worker_terraform_version: 0.11.2
+gpii_ci_worker_terraform_version: 0.11.3
 # From e.g. https://releases.hashicorp.com/terraform/{{ gpii_ci_worker_terraform_version }}/terraform_{{ gpii_ci_worker_terraform_version }}_SHA256SUMS
-gpii_ci_worker_terraform_checksum: sha256:f728fa73ff2a4c4235a28de4019802531758c7c090b6ca4c024d48063ab8537b
+gpii_ci_worker_terraform_checksum: sha256:6b8a7b83954597d36bbed23913dd51bc253906c612a070a21db373eab71b277b
 
 gpii_ci_worker_terragrunt_version: 0.14.0
 
