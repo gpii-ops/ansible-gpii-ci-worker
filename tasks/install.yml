@@ -93,6 +93,29 @@
     checksum: '{{ gpii_ci_worker_kops_checksum }}'
   when: current_kops_version.rc is not defined or current_kops_version.rc != 0
 
+- name: Check helm version
+  shell: "/usr/local/bin/helm version --client --short | head -n1 | grep {{ gpii_ci_worker_helm_version }}"
+  failed_when: False
+  changed_when: False
+  register: current_helm_version
+
+- name: Download helm
+  get_url:
+    url: 'https://storage.googleapis.com/kubernetes-helm/helm-{{ gpii_ci_worker_helm_version }}-linux-amd64.tar.gz'
+    dest: /usr/local/bin/
+    mode: 0440
+    force: yes
+  when: current_helm_version.rc is not defined or current_helm_version.rc != 0
+  register: helm_downloaded
+
+- name: Untar and install helm
+  unarchive:
+    src: '/usr/local/bin/helm-{{ gpii_ci_worker_helm_version }}-linux-amd64.tar.gz'
+    dest: /usr/local/bin/
+    remote_src: True
+  when: helm_downloaded|changed
+  tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
+
 - name: Install pip
   package:
     name: "{{ item }}"
