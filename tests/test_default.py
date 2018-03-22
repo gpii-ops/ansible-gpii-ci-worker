@@ -27,7 +27,7 @@ def test_kops_installed(Command):
     assert Command.exists("kops")
 
 
-def test_kops_installed(Command):
+def test_helm_installed(Command):
     assert Command.exists("helm")
 
 

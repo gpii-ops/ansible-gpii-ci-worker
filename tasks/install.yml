@@ -116,6 +116,29 @@
   when: helm_downloaded|changed
   tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
 
+- name: Copy helm executable to bin directory
+  copy:
+    remote_src: True
+    src: /usr/local/bin/linux-amd64/helm
+    dest: /usr/local/bin/helm
+    mode: 0555
+  when: helm_downloaded|changed
+  tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
+
+- name: Remove helm unzipped directory
+  file:
+    path: /usr/local/bin/linux-amd64
+    state: absent
+  when: helm_downloaded|changed
+  tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
+
+- name: Remove helm zip file
+  file:
+    path: "/usr/local/bin/helm-{{ gpii_ci_worker_helm_version  }}-linux-amd64.tar.gz"
+    state: absent
+  when: helm_downloaded|changed
+  tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
+
 - name: Install pip
   package:
     name: "{{ item }}"
