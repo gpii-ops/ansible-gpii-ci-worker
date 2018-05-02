@@ -39,6 +39,10 @@ def test_jq_installed(Command):
     assert Command.exists("jq")
 
 
+def test_docker_compose_installed(Command):
+    assert Command.exists("docker-compose")
+
+
 def test_rvm_gpg_key_imported(Command, Sudo):
     with Sudo("gitlab-runner"):
         gpg_list_keys = Command.check_output("gpg --list-keys")
