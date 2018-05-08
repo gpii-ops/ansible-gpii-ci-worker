@@ -47,7 +47,7 @@
     src: /usr/local/bin/terraform_{{ gpii_ci_worker_terraform_version }}_linux_amd64.zip
     dest: /usr/local/bin/
     remote_src: True
-  when: terraform_downloaded|changed
+  when: terraform_downloaded is changed
   tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
 
 - name: Check terragrunt version
@@ -113,7 +113,7 @@
     src: '/usr/local/bin/helm-{{ gpii_ci_worker_helm_version }}-linux-amd64.tar.gz'
     dest: /usr/local/bin/
     remote_src: True
-  when: helm_downloaded|changed
+  when: helm_downloaded is changed
   tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
 
 - name: Copy helm executable to bin directory
@@ -122,21 +122,21 @@
     src: /usr/local/bin/linux-amd64/helm
     dest: /usr/local/bin/helm
     mode: 0555
-  when: helm_downloaded|changed
+  when: helm_downloaded is changed
   tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
 
 - name: Remove helm unzipped directory
   file:
     path: /usr/local/bin/linux-amd64
     state: absent
-  when: helm_downloaded|changed
+  when: helm_downloaded is changed
   tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
 
 - name: Remove helm zip file
   file:
     path: "/usr/local/bin/helm-{{ gpii_ci_worker_helm_version  }}-linux-amd64.tar.gz"
     state: absent
-  when: helm_downloaded|changed
+  when: helm_downloaded is changed
   tags: skip_ansible_lint  # [ANSIBLE0016] Tasks that run when changed should likely be handlers
 
 - name: Install pip
