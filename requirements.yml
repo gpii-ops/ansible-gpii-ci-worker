@@ -2,5 +2,5 @@
 - src: https://github.com/DBLaci/ansible-gitlab-runner
   name: gitlab-runner
 
-- src: https://github.com/idi-ops/ansible-docker
-  name: docker
+- src: https://github.com/idi-ops/ansible-docker-ce
+  name: docker-ce
