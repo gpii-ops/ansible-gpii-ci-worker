@@ -169,13 +169,8 @@
   when: current_jq_version.rc is not defined or current_jq_version.rc != 0
 
 - name: Install docker-compose
-  package:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-    - docker-compose
-  tags:
-    - skip_ansible_lint
+  pip:
+    name: docker-compose
 
 - name: Check for rvm gpg key
   command: gpg --list-keys
