@@ -28,7 +28,12 @@ gpii_ci_worker_kops_checksum: sha1:3f806f914d8bf2a0b9b3c6785689257b7aadcd17
 
 gpii_ci_worker_helm_version: v2.8.2
 
+gpii_ci_worker_aws_version: 1.15.45
 
 gpii_ci_worker_jq_version: 1.5
 
 gpii_ci_worker_ruby_version: 2.4.3
+
+gpii_ci_worker_bundler_version: 1.16.1
+
+gpii_ci_worker_rake_version: 12.3.0
