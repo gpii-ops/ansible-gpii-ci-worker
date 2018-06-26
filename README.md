@@ -29,7 +29,7 @@ Role Variables
 # gpii_ci_worker_docker_email: alice@example.com
 
 # Passed to ansible-gitlab-runner
-gpii_ci_worker_gitlab_runner_concurrent: 4
+gpii_ci_worker_gitlab_runner_concurrent: 8
 
 # Passed to ansible-gitlab-runner
 gpii_ci_worker_gitlab_runner_registration_token: ""
@@ -37,19 +37,29 @@ gpii_ci_worker_gitlab_runner_registration_token: ""
 # Passed to ansible-gitlab-runner
 gpii_ci_worker_gitlab_runner_list: []
 
-gpii_ci_worker_terraform_version: 0.9.5
+gpii_ci_worker_terraform_version: 0.11.7
 # From e.g. https://releases.hashicorp.com/terraform/{{ gpii_ci_worker_terraform_version }}/terraform_{{ gpii_ci_worker_terraform_version }}_SHA256SUMS
-gpii_ci_worker_terraform_checksum: sha256:0cbb5474c76d878fbc99e7705ce6117f4ea0838175c13b2663286a207e38d783
+gpii_ci_worker_terraform_checksum: sha256:6b8ce67647a59b2a3f70199c304abca0ddec0e49fd060944c26f666298e23418
 
-gpii_ci_worker_terragrunt_version: 0.12.6
+gpii_ci_worker_terragrunt_version: 0.14.0
 
-gpii_ci_worker_kubectl_version: v1.7.2
+gpii_ci_worker_kubectl_version: v1.9.8
 
-gpii_ci_worker_kops_version: 1.6.2
+gpii_ci_worker_kops_version: 1.8.1
+# From e.g. https://github.com/kubernetes/kops/releases/download/{{ gpii_ci_worker_kops_version }}/kops-darwin-amd64-sha1
+gpii_ci_worker_kops_checksum: sha1:3f806f914d8bf2a0b9b3c6785689257b7aadcd17
+
+gpii_ci_worker_helm_version: v2.8.2
+
+gpii_ci_worker_aws_version: 1.15.45
 
 gpii_ci_worker_jq_version: 1.5
 
-gpii_ci_worker_ruby_version: 2.4.0
+gpii_ci_worker_ruby_version: 2.4.3
+
+gpii_ci_worker_bundler_version: 1.16.1
+
+gpii_ci_worker_rake_version: 12.3.0
 ```
 
 Example Playbook
