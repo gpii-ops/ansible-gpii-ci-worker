@@ -1,4 +1,5 @@
 ansible
+ansible-lint >= 3.4.22
 flake8
 molecule == 1.25.1
 python-vagrant
