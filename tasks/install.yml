@@ -153,6 +153,8 @@
 - name: Install aws cli
   pip:
     name: awscli
+    state: present
+    version: "{{ gpii_ci_worker_aws_version }}"
 
 - name: Check jq version
   shell: "/usr/local/bin/jq --version | head -n1 | grep {{ gpii_ci_worker_jq_version }}"
@@ -226,20 +228,22 @@
   command: sudo -i -u gitlab-runner rvm install --default {{ gpii_ci_worker_ruby_version }}
   when: ruby_exists.stat.exists == False
 
-- name: Check for bundler installation
-  stat:
-    path: ~gitlab-runner/.rvm/gems/ruby-{{ gpii_ci_worker_ruby_version }}/bin/bundle
-  register: bundler_exists
+- name: Check bundler version
+  shell: "sudo -i -u gitlab-runner bundle --version | grep {{ gpii_ci_worker_bundler_version }}"
+  failed_when: False
+  changed_when: False
+  register: current_bundler_version
 
 - name: Install bundler with rvm
-  command: sudo -i -u gitlab-runner gem install bundler
-  when: bundler_exists.stat.exists == False
+  command: sudo -i -u gitlab-runner gem install bundler -v {{ gpii_ci_worker_bundler_version }}
+  when: current_bundler_version.rc is not defined or current_bundler_version.rc != 0
 
-- name: Check for rake installation
-  stat:
-    path: ~gitlab-runner/.rvm/gems/ruby-{{ gpii_ci_worker_ruby_version }}/bin/rake
-  register: rake_exists
+- name: Check rake version
+  shell: "sudo -i -u gitlab-runner rake --version | grep {{ gpii_ci_worker_rake_version }}"
+  failed_when: False
+  changed_when: False
+  register: current_rake_version
 
 - name: Install rake with rvm
-  command: sudo -i -u gitlab-runner gem install rake
-  when: rake_exists.stat.exists == False
+  command: sudo -i -u gitlab-runner gem install rake -v {{ gpii_ci_worker_rake_version }}
+  when: current_rake_version.rc is not defined or current_rake_version.rc != 0
