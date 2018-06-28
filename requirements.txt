@@ -1,5 +1,5 @@
 ansible
-ansible-lint >= 3.4.22
+ansible-lint >= 3.4.22  # https://issues.gpii.net/browse/GPII-3142
 flake8
 molecule == 1.25.1
 python-vagrant
