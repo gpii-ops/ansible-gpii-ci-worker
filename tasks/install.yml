@@ -112,8 +112,6 @@
     path: '/usr/local/bin/helm-{{ gpii_ci_worker_helm_version  }}-linux-amd64.tar.gz'
   register: helm_downloaded
 
-- debug:
-    var: helm_downloaded
 - name: Untar and install helm
   unarchive:
     src: '/usr/local/bin/helm-{{ gpii_ci_worker_helm_version }}-linux-amd64.tar.gz'
