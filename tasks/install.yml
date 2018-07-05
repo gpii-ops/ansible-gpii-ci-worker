@@ -236,6 +236,8 @@
   changed_when: False
   register: current_bundler_version
 
+# Note: this stanza won't downgrade a gem to an older version. See
+# https://issues.gpii.net/browse/GPII-3155
 - name: Install bundler with rvm
   command: sudo -i -u gitlab-runner gem install bundler -v {{ gpii_ci_worker_bundler_version }}
   when: current_bundler_version.rc is not defined or current_bundler_version.rc != 0
@@ -246,6 +248,8 @@
   changed_when: False
   register: current_rake_version
 
+# Note: this stanza won't downgrade a gem to an older version. See
+# https://issues.gpii.net/browse/GPII-3155
 - name: Install rake with rvm
   command: sudo -i -u gitlab-runner gem install rake -v {{ gpii_ci_worker_rake_version }}
   when: current_rake_version.rc is not defined or current_rake_version.rc != 0
