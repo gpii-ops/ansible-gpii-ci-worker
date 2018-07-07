@@ -34,6 +34,6 @@ gpii_ci_worker_jq_version: 1.5
 
 gpii_ci_worker_ruby_version: 2.4.3
 
-gpii_ci_worker_bundler_version: 1.16.1
+gpii_ci_worker_bundler_version: 1.16.2
 
 gpii_ci_worker_rake_version: 12.3.0
