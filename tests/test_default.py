@@ -62,7 +62,11 @@ def test_ruby_installed_with_rvm(File, Sudo):
 
 def test_bundler_installed_with_rvm(File, Sudo):
     with Sudo("gitlab-runner"):
-        assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.3/bin/bundle").exists
+        # bundler comes with rvm. If that version is the same as the version we
+        # ask gem to install, then gem doesn't install it. We look for the
+        # exectuable at both possible locations.
+        assert File("/home/gitlab-runner/.rvm/gems/ruby-2.4.3/bin/bundle").exists or \
+            File("/home/gitlab-runner/.rvm/rubies/ruby-2.4.3/bin/bundle").exists
 
 
 def test_rake_installed_with_rvm(File, Sudo):
