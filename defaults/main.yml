@@ -6,7 +6,7 @@
 # gpii_ci_worker_docker_email: alice@example.com
 
 # Passed to ansible-gitlab-runner
-gpii_ci_worker_gitlab_runner_concurrent: 8
+gpii_ci_worker_gitlab_runner_concurrent: 12
 
 # Passed to ansible-gitlab-runner
 gpii_ci_worker_gitlab_runner_registration_token: ""
